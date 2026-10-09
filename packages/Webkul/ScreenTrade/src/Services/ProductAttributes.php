@@ -12,7 +12,7 @@ class ProductAttributes
      */
     public function install(?string $locale = null): void
     {
-        DB::transaction(function () use ($locale) {
+        DB::transaction(function () {
             $codes = array_keys(config('screen_trade.product_attributes'));
 
             foreach (config('screen_trade.product_attributes') as $code => $definition) {
@@ -23,14 +23,14 @@ class ProductAttributes
                         throw new RuntimeException("Incompatible existing products attribute: {$code}. Review it before installing Screen Trade product fields.");
                     }
 
-                    $this->installMissingOptions((int) $existing->id, $definition, $locale);
+                    $this->installMissingOptions((int) $existing->id, $definition);
 
                     continue;
                 }
 
                 $attributeId = DB::table('attributes')->insertGetId([
                     'code' => $code,
-                    'name' => trans('admin::app.screen-trade.products.fields.'.$code, [], $locale),
+                    'name' => $definition['name'],
                     'entity_type' => 'products',
                     'type' => $definition['type'],
                     'lookup_type' => $definition['lookup_type'] ?? null,
@@ -44,16 +44,14 @@ class ProductAttributes
                     'updated_at' => now(),
                 ]);
 
-                $this->installMissingOptions($attributeId, $definition, $locale);
+                $this->installMissingOptions($attributeId, $definition);
             }
         });
     }
 
-    private function installMissingOptions(int $attributeId, array $definition, ?string $locale): void
+    private function installMissingOptions(int $attributeId, array $definition): void
     {
-        foreach ($definition['options'] ?? [] as $index => $option) {
-            $name = trans('admin::app.screen-trade.products.options.'.$option, [], $locale);
-
+        foreach ($definition['options'] ?? [] as $index => $name) {
             $exists = DB::table('attribute_options')
                 ->where('attribute_id', $attributeId)
                 ->where('name', $name)
