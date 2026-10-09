@@ -91,6 +91,7 @@
                                                 class="!w-24 !rounded-l-none"
                                                 ::value="contactNumber.label"
                                             >
+                                                <option v-if="name === 'contact_numbers'" value="whatsapp">WhatsApp</option>
                                                 <option value="work">@lang('admin::app.common.custom-attributes.work')</option>
                                                 <option value="home">@lang('admin::app.common.custom-attributes.home')</option>
                                             </x-admin::form.control-group.control>

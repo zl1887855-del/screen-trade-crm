@@ -1,6 +1,30 @@
 <?php
 
 return [
+
+    'screen-trade' => [
+        'fields' => [
+            'country_id' => '国家 / 地区',
+            'region' => '地区 / 城市',
+            'customer_type' => '客户类型',
+            'primary_products' => '主要采购产品',
+            'customer_source_id' => '客户来源',
+            'customer_grade' => '客户等级',
+            'last_followed_up_at' => '最近跟进时间',
+            'customer_notes' => '客户备注',
+        ],
+        'options' => [
+            'wholesaler' => '批发商',
+            'repair_shop' => '维修店',
+            'importer' => '进口商',
+            'distributor' => '分销商',
+            'A' => 'A',
+            'B' => 'B',
+            'C' => 'C',
+        ],
+        'whatsapp-format' => 'WhatsApp 号码请使用国际格式，例如 +2348012345678。',
+    ],
+
     'acl' => [
         'help' => '帮助',
         'leads' => '线索',
