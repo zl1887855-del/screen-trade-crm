@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.2.6 (10th of Sept 2026)**
 
+* [feature] Added Screen Trade customer attributes and WhatsApp contact labels while preserving existing CRM customer data.
+
 * [security] Improved in Security.
 
 * [feature] Added MariaDB support.

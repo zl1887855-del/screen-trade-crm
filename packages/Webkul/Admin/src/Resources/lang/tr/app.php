@@ -1,6 +1,30 @@
 <?php
 
 return [
+
+    'screen-trade' => [
+        'fields' => [
+            'country_id' => 'Country / territory',
+            'region' => 'Region / city',
+            'customer_type' => 'Customer type',
+            'primary_products' => 'Main purchasing products',
+            'customer_source_id' => 'Customer source',
+            'customer_grade' => 'Customer grade',
+            'last_followed_up_at' => 'Last follow-up time',
+            'customer_notes' => 'Customer notes',
+        ],
+        'options' => [
+            'wholesaler' => 'Wholesaler',
+            'repair_shop' => 'Repair shop',
+            'importer' => 'Importer',
+            'distributor' => 'Distributor',
+            'A' => 'A',
+            'B' => 'B',
+            'C' => 'C',
+        ],
+        'whatsapp-format' => 'Use an international WhatsApp number, for example +2348012345678.',
+    ],
+
     'acl' => [
         'help' => 'Yardım',
         'leads' => 'Potansiyeller',

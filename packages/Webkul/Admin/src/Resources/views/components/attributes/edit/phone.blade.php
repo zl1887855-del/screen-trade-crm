@@ -55,6 +55,10 @@
                         v-model="contactNumber['label']"
                         ::disabled="isDisabled"
                     >
+                        @if ($attribute->entity_type === 'persons' && $attribute->code === 'contact_numbers')
+                            <option value="whatsapp">WhatsApp</option>
+                        @endif
+
                         <option value="work">@lang('admin::app.common.custom-attributes.work')</option>
                         <option value="home">@lang('admin::app.common.custom-attributes.home')</option>
                     </x-admin::form.control-group.control>
