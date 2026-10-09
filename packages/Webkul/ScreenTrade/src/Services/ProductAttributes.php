@@ -51,7 +51,7 @@ class ProductAttributes
 
     private function installMissingOptions(int $attributeId, array $definition): void
     {
-        foreach ($definition['options'] ?? [] as $index => $name) {
+        foreach (array_values($definition['options'] ?? []) as $index => $name) {
             $exists = DB::table('attribute_options')
                 ->where('attribute_id', $attributeId)
                 ->where('name', $name)
