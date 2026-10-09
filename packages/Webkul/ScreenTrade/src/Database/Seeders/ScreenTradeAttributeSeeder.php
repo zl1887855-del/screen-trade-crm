@@ -4,6 +4,7 @@ namespace Webkul\ScreenTrade\Database\Seeders;
 
 use Webkul\Installer\Database\Seeders\Attribute\AttributeSeeder;
 use Webkul\ScreenTrade\Services\CustomerAttributes;
+use Webkul\ScreenTrade\Services\ProductAttributes;
 
 class ScreenTradeAttributeSeeder extends AttributeSeeder
 {
@@ -11,6 +12,9 @@ class ScreenTradeAttributeSeeder extends AttributeSeeder
     {
         parent::run($parameters);
 
-        app(CustomerAttributes::class)->install($parameters['locale'] ?? config('app.locale'));
+        $locale = $parameters['locale'] ?? config('app.locale');
+
+        app(CustomerAttributes::class)->install($locale);
+        app(ProductAttributes::class)->install($locale);
     }
 }

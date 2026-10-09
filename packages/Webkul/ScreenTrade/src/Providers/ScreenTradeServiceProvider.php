@@ -8,8 +8,9 @@ use Webkul\Contact\Repositories\PersonRepository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Installer\Database\Seeders\Attribute\AttributeSeeder;
 use Webkul\ScreenTrade\Console\Commands\InstallCustomerAttributes;
+use Webkul\ScreenTrade\Console\Commands\InstallProductAttributes;
 use Webkul\ScreenTrade\Database\Seeders\ScreenTradeAttributeSeeder;
-use Webkul\ScreenTrade\Http\Requests\CustomerAttributeForm;
+use Webkul\ScreenTrade\Http\Requests\ProductAttributeForm;
 use Webkul\ScreenTrade\Repositories\CustomerPersonRepository;
 
 class ScreenTradeServiceProvider extends ServiceProvider
@@ -17,10 +18,11 @@ class ScreenTradeServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../Config/customer_attributes.php', 'screen_trade.customer_attributes');
+        $this->mergeConfigFrom(__DIR__.'/../Config/product_attributes.php', 'screen_trade.product_attributes');
 
         $this->app->bind(PersonRepository::class, CustomerPersonRepository::class);
 
-        $this->app->bind(AttributeForm::class, CustomerAttributeForm::class);
+        $this->app->bind(AttributeForm::class, ProductAttributeForm::class);
         $this->app->bind(AttributeSeeder::class, ScreenTradeAttributeSeeder::class);
 
         config(['attribute_lookups.screen_trade_countries' => [
@@ -34,7 +36,10 @@ class ScreenTradeServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         if ($this->app->runningInConsole()) {
-            $this->commands([InstallCustomerAttributes::class]);
+            $this->commands([
+                InstallCustomerAttributes::class,
+                InstallProductAttributes::class,
+            ]);
         }
     }
 }
